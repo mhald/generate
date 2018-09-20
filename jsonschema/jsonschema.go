@@ -52,6 +52,7 @@ type Schema struct {
 	NameCount int `json:"-" `
 }
 
+// StringArray with methods to search for a given string
 type StringArray []string
 
 // ID returns the schema URI id.
@@ -92,6 +93,7 @@ func (s *Schema) Type() (firstOrDefault string, multiple bool) {
 	return "", multiple
 }
 
+// Contains checks if the string array contains a given string
 func (f StringArray) Contains(s string) bool {
 	for _, value := range f {
 		if value == s {
@@ -101,6 +103,7 @@ func (f StringArray) Contains(s string) bool {
 	return false
 }
 
+// Types returns the types found as a string array
 func (s *Schema) Types() (StringArray) {
 	// We've got a single value, e.g. { "type": "object" }
 	if ts, ok := s.TypeValue.(string); ok {
