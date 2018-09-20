@@ -52,6 +52,8 @@ type Schema struct {
 	NameCount int `json:"-" `
 }
 
+type StringArray []string
+
 // ID returns the schema URI id.
 func (s *Schema) ID() string {
 	// prefer "$id" over "id"
@@ -88,6 +90,35 @@ func (s *Schema) Type() (firstOrDefault string, multiple bool) {
 	}
 
 	return "", multiple
+}
+
+func (f StringArray) Contains(s string) bool {
+	for _, value := range f {
+		if value == s {
+			return true
+		}
+	}
+	return false
+}
+
+func (s *Schema) Types() (StringArray) {
+	// We've got a single value, e.g. { "type": "object" }
+	if ts, ok := s.TypeValue.(string); ok {
+		return []string{ts}
+	}
+
+	// We could have multiple types in the type value, e.g. { "type": [ "object", "array" ] }
+	if a, ok := s.TypeValue.([]interface{}); ok {
+		ret := make([]string, 0)
+		for _, n := range a {
+			if s, ok := n.(string); ok {
+				ret = append(ret, s)
+			}
+		}
+		return ret
+	}
+
+	return []string{}
 }
 
 // Parse parses a JSON schema from a string.

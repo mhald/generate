@@ -218,6 +218,12 @@ func getTypeForField(parentTypeKey *url.URL, fieldName string, fieldGoName strin
 		return "interface{}", nil
 	}
 
+	arr := fieldSchema.Types()
+	if arr.Contains("string") && arr.Contains("null") {
+		return "*string", nil
+	}
+
+
 	majorType, multiple := fieldSchema.Type()
 	if multiple {
 		return "interface{}", nil
