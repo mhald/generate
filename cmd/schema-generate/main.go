@@ -12,8 +12,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/a-h/generate"
-	"github.com/a-h/generate/jsonschema"
+	"github.com/mhald/generate"
+	"github.com/mhald/generate/jsonschema"
 )
 
 var (

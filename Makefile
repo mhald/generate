@@ -1,4 +1,4 @@
-PKG := github.com/a-h/generate
+PKG := github.com/mhald/generate
 CMD := $(PKG)/cmd/schema-generate
 BIN := schema-generate
 

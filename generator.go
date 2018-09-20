@@ -11,7 +11,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/a-h/generate/jsonschema"
+	"github.com/mhald/generate/jsonschema"
 )
 
 // Generator will produce structs from the JSON schema.
